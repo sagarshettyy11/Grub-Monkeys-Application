@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 
 class AppColors {
-  // Brand
   static const primary = Color(0xFFF47C2E);
   static const primaryLight = Color(0xFFFFF0E6);
-  // Neutrals
   static const background = Color(0xFFF8F8F8);
   static const white = Color(0xFFFFFFFF);
   static const textDark = Color(0xFF1A1A1A);
@@ -14,10 +13,8 @@ class AppColors {
   static const border = Color(0xFFEEEEEE);
   static const divider = Color(0xFFF0F0F0);
   static const cardShadow = Color(0x0A000000);
-  // Action buttons
   static const editBlue = Color(0xFF4A90D9);
   static const deleteRed = Color(0xFFE05252);
-  // Category icon backgrounds (light pastel)
   static const iconSeafood = Color(0xFFFEEFE2); // peach-orange
   static const iconBurger = Color(0xFFFFF3E0); // warm amber
   static const iconJuice = Color(0xFFE8F5E9); // fresh green
@@ -26,7 +23,6 @@ class AppColors {
   static const iconChinese = Color(0xFFEDE7F6); // purple
   static const iconSandwich = Color(0xFFE0F2F1); // teal
   static const iconBeverage = Color(0xFFE3F2FD); // light blue
-  // Category icon foregrounds
   static const fgSeafood = Color(0xFFF47C2E);
   static const fgBurger = Color(0xFFEF8C00);
   static const fgJuice = Color(0xFF388E3C);
@@ -129,7 +125,6 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  int _selectedNavIndex = 1; 
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   List<CategoryData> get _filtered => _searchQuery.isEmpty
@@ -169,10 +164,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ),
               ),
             ),
-            _buildBottomNav(),
           ],
         ),
       ),
+      bottomNavigationBar: const CommonBottomNav(currentIndex: 1),
     );
   }
 
@@ -276,51 +271,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
     );
   }
-
-  Widget _buildBottomNav() {
-    final tabs = [
-      _NavTab(icon: Icons.room_service_outlined, label: 'Items'),
-      _NavTab(icon: Icons.widgets_outlined, label: 'Categories'),
-      _NavTab(icon: Icons.bar_chart_rounded, label: 'Reports'),
-      _NavTab(icon: Icons.more_horiz_rounded, label: 'More'),
-    ];
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.border, width: 1)),
-      ),
-      padding: const EdgeInsets.only(top: 10, bottom: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(tabs.length, (i) {
-          final active = i == _selectedNavIndex;
-          return GestureDetector(
-            onTap: () => setState(() => _selectedNavIndex = i),
-            behavior: HitTestBehavior.opaque,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(tabs[i].icon, size: 26, color: active ? AppColors.primary : AppColors.textLight),
-                  const SizedBox(height: 4),
-                  Text(
-                    tabs[i].label,
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: active ? FontWeight.w600 : FontWeight.w400,
-                      color: active ? AppColors.primary : AppColors.textLight,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 }
 
 class _TopBar extends StatelessWidget {
@@ -401,19 +351,15 @@ class _HamburgerIcon extends StatelessWidget {
   }
 }
 
-// ─── Category Row ─────────────────────────────────────────────────────────────
-
 class _CategoryRow extends StatelessWidget {
   final CategoryData category;
   const _CategoryRow({required this.category});
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       child: Row(
         children: [
-          // ── Square food photo ──────────────────────────────────
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
@@ -430,8 +376,6 @@ class _CategoryRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 14),
-
-          // ── Colored circle icon ────────────────────────────────
           Container(
             width: 48,
             height: 48,
@@ -439,8 +383,6 @@ class _CategoryRow extends StatelessWidget {
             child: Icon(category.icon, color: category.iconFg, size: 24),
           ),
           const SizedBox(width: 12),
-
-          // ── Name + count ───────────────────────────────────────
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -459,8 +401,6 @@ class _CategoryRow extends StatelessWidget {
               ],
             ),
           ),
-
-          // ── Action buttons ─────────────────────────────────────
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -492,16 +432,12 @@ class _CategoryRow extends StatelessWidget {
   }
 }
 
-// ─── Action Button ────────────────────────────────────────────────────────────
-
 class _ActionBtn extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final Color borderColor;
   final VoidCallback onTap;
-
   const _ActionBtn({required this.icon, required this.iconColor, required this.borderColor, required this.onTap});
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -518,12 +454,4 @@ class _ActionBtn extends StatelessWidget {
       ),
     );
   }
-}
-
-// ─── Nav Tab Model ────────────────────────────────────────────────────────────
-
-class _NavTab {
-  final IconData icon;
-  final String label;
-  const _NavTab({required this.icon, required this.label});
 }

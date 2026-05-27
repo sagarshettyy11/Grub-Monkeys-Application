@@ -1,35 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-void main() {
-  runApp(const FoodManagementApp());
-}
-
-class FoodManagementApp extends StatelessWidget {
-  const FoodManagementApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Food Management',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF47C2E)),
-        useMaterial3: true,
-        fontFamily: 'SF Pro Display',
-      ),
-      home: const FoodManagementScreen(),
-    );
-  }
-}
-
-// ─── Data Models ────────────────────────────────────────────────────────────
+import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 
 class FoodCategory {
   final String name;
   final int itemCount;
   final String imageUrl;
-
   const FoodCategory({required this.name, required this.itemCount, required this.imageUrl});
 }
 
@@ -39,7 +15,6 @@ class FoodItem {
   final double price;
   final bool isActive;
   final String imageUrl;
-
   const FoodItem({
     required this.name,
     required this.description,
@@ -48,8 +23,6 @@ class FoodItem {
     required this.imageUrl,
   });
 }
-
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -66,8 +39,6 @@ class AppColors {
   static const deletRedBorder = Color(0xFFE05252);
   static const cardShadow = Color(0x0A000000);
 }
-
-// ─── Sample Data ─────────────────────────────────────────────────────────────
 
 final List<FoodCategory> _categories = [
   FoodCategory(
@@ -135,20 +106,15 @@ final List<FoodItem> _seaFoodItems = [
   ),
 ];
 
-// ─── Main Screen ─────────────────────────────────────────────────────────────
-
-class FoodManagementScreen extends StatefulWidget {
-  const FoodManagementScreen({super.key});
-
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
   @override
-  State<FoodManagementScreen> createState() => _FoodManagementScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _FoodManagementScreenState extends State<FoodManagementScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedCategoryIndex = 0;
-  int _selectedNavIndex = 0;
   final TextEditingController _searchController = TextEditingController();
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -186,10 +152,10 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                 ),
               ),
             ),
-            _buildBottomNav(),
           ],
         ),
       ),
+      bottomNavigationBar: const CommonBottomNav(currentIndex: 0),
     );
   }
 
@@ -214,7 +180,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             ),
           ),
           const SizedBox(width: 14),
-          // Title block
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,15 +233,12 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
     );
   }
 
-  // ─── Categories Section ───────────────────────────────────────────────────
-
   Widget _buildCategoriesSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // "Categories" header row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -294,7 +256,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             ],
           ),
           const SizedBox(height: 14),
-          // Horizontal scrollable category cards
           SizedBox(
             height: 140,
             child: ListView.separated(
@@ -315,7 +276,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
   Widget _buildCategoryCard(int index) {
     final category = _categories[index];
     final isSelected = index == _selectedCategoryIndex;
-
     return GestureDetector(
       onTap: () => setState(() => _selectedCategoryIndex = index),
       child: AnimatedContainer(
@@ -368,11 +328,8 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
     );
   }
 
-  // ─── Selected Category Banner ─────────────────────────────────────────────
-
   Widget _buildSelectedCategoryBanner() {
     final category = _categories[_selectedCategoryIndex];
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
@@ -440,14 +397,11 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
     );
   }
 
-  // ─── Search Bar ───────────────────────────────────────────────────────────
-
   Widget _buildSearchBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          // Search field
           Expanded(
             child: Container(
               height: 50,
@@ -470,7 +424,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             ),
           ),
           const SizedBox(width: 12),
-          // Filter button
           Container(
             width: 50,
             height: 50,
@@ -485,8 +438,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
       ),
     );
   }
-
-  // ─── Food Item List ───────────────────────────────────────────────────────
 
   Widget _buildItemList() {
     return Padding(
@@ -517,7 +468,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Food image
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
@@ -534,7 +484,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             ),
           ),
           const SizedBox(width: 12),
-          // Name + description + price
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -566,7 +515,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             ),
           ),
           const SizedBox(width: 8),
-          // Right-side controls
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -582,7 +530,6 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                   ),
                 ),
               const SizedBox(height: 8),
-              // Action buttons row
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -638,69 +585,11 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
       ),
     );
   }
-
-  // ─── Bottom Navigation ────────────────────────────────────────────────────
-
-  Widget _buildBottomNav() {
-    final navItems = [
-      _NavItem(icon: Icons.room_service_outlined, label: 'Items'),
-      _NavItem(icon: Icons.widgets_outlined, label: 'Categories'),
-      _NavItem(icon: Icons.bar_chart_rounded, label: 'Reports'),
-      _NavItem(icon: Icons.more_horiz_rounded, label: 'More'),
-    ];
-
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.border, width: 1)),
-      ),
-      padding: const EdgeInsets.only(top: 10, bottom: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(navItems.length, (index) {
-          final isActive = index == _selectedNavIndex;
-          return GestureDetector(
-            onTap: () => setState(() => _selectedNavIndex = index),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(navItems[index].icon, size: 26, color: isActive ? AppColors.primary : AppColors.textLight),
-                  const SizedBox(height: 4),
-                  Text(
-                    navItems[index].label,
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-                      color: isActive ? AppColors.primary : AppColors.textLight,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 }
-
-// ─── Helper Classes ───────────────────────────────────────────────────────────
-
-class _NavItem {
-  final IconData icon;
-  final String label;
-  const _NavItem({required this.icon, required this.label});
-}
-
-// ─── SafeAreaView wrapper ────────────────────────────────────────────────────
 
 class SafeAreaView extends StatelessWidget {
   final Widget child;
   const SafeAreaView({super.key, required this.child});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: child);

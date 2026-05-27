@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -24,8 +25,8 @@ class AdminProfileScreen extends StatefulWidget {
   @override
   State<AdminProfileScreen> createState() => _AdminProfileScreenState();
 }
+
 class _AdminProfileScreenState extends State<AdminProfileScreen> {
-  int _selectedNavIndex = 3;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -54,10 +55,10 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                 ),
               ),
             ),
-            _buildBottomNav(),
           ],
         ),
       ),
+      bottomNavigationBar: const CommonBottomNav(currentIndex: 3),
     );
   }
 
@@ -141,7 +142,11 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                         color: AppColors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withValues(alpha: 0.12), blurRadius: 4, offset: const Offset(0, 1)),
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.12),
+                            blurRadius: 4,
+                            offset: const Offset(0, 1),
+                          ),
                         ],
                       ),
                       child: const Icon(Icons.camera_alt_outlined, size: 16, color: AppColors.textDark),
@@ -254,51 +259,6 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
             );
           }),
         ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    final tabs = [
-      _NavTab(icon: Icons.room_service_outlined, label: 'Items'),
-      _NavTab(icon: Icons.widgets_outlined, label: 'Categories'),
-      _NavTab(icon: Icons.bar_chart_rounded, label: 'Reports'),
-      _NavTab(icon: Icons.person_rounded, label: 'Admin Profile'),
-    ];
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.border, width: 1)),
-      ),
-      padding: const EdgeInsets.only(top: 10, bottom: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(tabs.length, (i) {
-          final active = i == _selectedNavIndex;
-          return GestureDetector(
-            onTap: () => setState(() => _selectedNavIndex = i),
-            behavior: HitTestBehavior.opaque,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(tabs[i].icon, size: 26, color: active ? AppColors.primary : AppColors.textLight),
-                  const SizedBox(height: 4),
-                  Text(
-                    tabs[i].label,
-                    style: TextStyle(
-                      fontSize: 10.5,
-                      fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-                      color: active ? AppColors.primary : AppColors.textLight,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
       ),
     );
   }
@@ -471,10 +431,4 @@ class _SettingRow extends StatelessWidget {
       ),
     );
   }
-}
-
-class _NavTab {
-  final IconData icon;
-  final String label;
-  const _NavTab({required this.icon, required this.label});
 }

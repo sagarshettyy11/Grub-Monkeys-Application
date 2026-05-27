@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -80,7 +81,6 @@ class ReportsScreen extends StatefulWidget {
 }
 
 class _ReportsScreenState extends State<ReportsScreen> {
-  int _selectedNavIndex = 2;
   String selectedRange = 'Last 7 Days';
   static const List<double> _chartData = [0, 0, 2, 36, 39, 21, 16, 35];
   static const List<StatCardData> _stats = [
@@ -132,7 +132,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark),
     );
-
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -166,10 +165,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 ),
               ),
             ),
-            _buildBottomNav(),
           ],
         ),
       ),
+      bottomNavigationBar: const CommonBottomNav(currentIndex: 0),
     );
   }
 
@@ -388,50 +387,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
     );
   }
 
-  Widget _buildBottomNav() {
-    final tabs = [
-      _NavTab(icon: Icons.room_service_outlined, label: 'Items'),
-      _NavTab(icon: Icons.widgets_outlined, label: 'Categories'),
-      _NavTab(icon: Icons.bar_chart_rounded, label: 'Reports'),
-      _NavTab(icon: Icons.person_outline_rounded, label: 'Admin Profile'),
-    ];
-
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.border, width: 1)),
-      ),
-      padding: const EdgeInsets.only(top: 10, bottom: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(tabs.length, (i) {
-          final active = i == _selectedNavIndex;
-          return GestureDetector(
-            onTap: () => setState(() => _selectedNavIndex = i),
-            behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(tabs[i].icon, size: 26, color: active ? AppColors.navActive : AppColors.navInactive),
-                  const SizedBox(height: 4),
-                  Text(
-                    tabs[i].label,
-                    style: TextStyle(
-                      fontSize: 10.5,
-                      fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-                      color: active ? AppColors.navActive : AppColors.navInactive,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 }
 
 class _StatCard extends StatelessWidget {
@@ -765,10 +720,4 @@ class _HamburgerIcon extends StatelessWidget {
       ],
     );
   }
-}
-
-class _NavTab {
-  final IconData icon;
-  final String label;
-  const _NavTab({required this.icon, required this.label});
 }

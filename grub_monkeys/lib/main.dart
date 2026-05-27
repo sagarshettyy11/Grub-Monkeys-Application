@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grub_monkeys/screens/profile.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     final baseTheme = ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple));
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: baseTheme.copyWith(
         textTheme: GoogleFonts.interTextTheme(baseTheme.textTheme),
         primaryTextTheme: GoogleFonts.interTextTheme(baseTheme.primaryTextTheme),
