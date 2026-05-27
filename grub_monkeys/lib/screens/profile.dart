@@ -68,7 +68,6 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Section header
           _SectionHeader(title: 'Restaurant Details', onEdit: () {}),
           const SizedBox(height: 16),
           Row(

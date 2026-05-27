@@ -196,7 +196,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
   Widget _buildStatCards() {
     return SizedBox(
-      height: 122,
+      height: 140,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -392,7 +392,6 @@ class _StatCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 4),
-          // Value
           Text(
             data.value,
             style: const TextStyle(
