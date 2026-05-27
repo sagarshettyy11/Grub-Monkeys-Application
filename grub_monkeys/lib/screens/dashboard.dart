@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
+import 'package:grub_monkeys/widgets/common_topbar.dart';
 
 class FoodCategory {
   final String name;
@@ -132,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: SafeAreaView(
         child: Column(
           children: [
-            _buildTopBar(),
+            CommonTopBar(title: 'Food Management', subtitle: 'Manage your food categories & items'),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -159,79 +160,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildTopBar() {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(width: 22, height: 2, color: AppColors.textDark),
-                const SizedBox(height: 5),
-                Container(width: 16, height: 2, color: AppColors.textDark),
-                const SizedBox(height: 5),
-                Container(width: 22, height: 2, color: AppColors.textDark),
-              ],
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Food Management',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
-                    letterSpacing: -0.3,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Manage your food categories & items',
-                  style: TextStyle(fontSize: 12, color: AppColors.textLight, fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-          ),
-          // Add Category button
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.add, size: 16, color: AppColors.white),
-                label: const Text(
-                  'Add Category',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                    letterSpacing: 0.1,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  elevation: 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-              ),
-              const SizedBox(height: 3),
-              Text('Add new list / category', style: TextStyle(fontSize: 10, color: AppColors.textLight)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildCategoriesSection() {
     return Padding(

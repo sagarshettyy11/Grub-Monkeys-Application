@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
+import 'package:grub_monkeys/widgets/common_topbar.dart';
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -137,7 +138,28 @@ class _ReportsScreenState extends State<ReportsScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildTopBar(),
+            CommonTopBar(
+              title: 'Reports',
+              subtitle: 'Track your website performance',
+              action: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.border),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.calendar_today_outlined, size: 14),
+                      SizedBox(width: 6),
+                      Text('Last 30 Days'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -169,62 +191,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
         ),
       ),
       bottomNavigationBar: const CommonBottomNav(currentIndex: 0),
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        children: [
-          _HamburgerIcon(),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Reports',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
-                    letterSpacing: -0.4,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text('Track your website performance', style: TextStyle(fontSize: 12, color: AppColors.textLight)),
-              ],
-            ),
-          ),
-          // Date range picker button
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.border, width: 1.2),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.textDark),
-                  const SizedBox(width: 6),
-                  Text(
-                    selectedRange,
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: AppColors.textDark),
-                  ),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.keyboard_arrow_down_rounded, size: 16, color: AppColors.textDark),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -386,7 +352,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
       ),
     );
   }
-
 }
 
 class _StatCard extends StatelessWidget {
@@ -677,7 +642,6 @@ class _LineChartPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
       textAlign: textAlign,
     )..layout(maxWidth: width ?? 120);
-
     final dx = centered ? offset.dx - tp.width / 2 : offset.dx;
     tp.paint(canvas, Offset(dx, offset.dy));
   }
@@ -701,23 +665,6 @@ class _SectionCard extends StatelessWidget {
         boxShadow: const [BoxShadow(color: AppColors.cardShadow, blurRadius: 8, offset: Offset(0, 2))],
       ),
       child: child,
-    );
-  }
-}
-
-class _HamburgerIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(width: 22, height: 2, color: AppColors.textDark),
-        const SizedBox(height: 5),
-        Container(width: 16, height: 2, color: AppColors.textDark),
-        const SizedBox(height: 5),
-        Container(width: 22, height: 2, color: AppColors.textDark),
-      ],
     );
   }
 }

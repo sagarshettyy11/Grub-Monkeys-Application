@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
+import 'package:grub_monkeys/widgets/common_topbar.dart';
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -146,7 +147,29 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _TopBar(),
+            CommonTopBar(
+              title: 'Categories',
+              subtitle: 'Manage your food categories/lists',
+              action: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.add, size: 16, color: AppColors.white),
+                label: const Text(
+                  'Add Category',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                    letterSpacing: 0.1,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -273,83 +296,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   }
 }
 
-class _TopBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(padding: const EdgeInsets.only(top: 4), child: _HamburgerIcon()),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
-                    letterSpacing: -0.4,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text('Manage your food categories/lists', style: TextStyle(fontSize: 12, color: AppColors.textLight)),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.add, size: 16, color: AppColors.white),
-                label: const Text(
-                  'Add Category',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                    letterSpacing: 0.1,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  elevation: 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text('Add new list / category', style: TextStyle(fontSize: 10, color: AppColors.textLight)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
 
-class _HamburgerIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(width: 22, height: 2, color: AppColors.textDark),
-        const SizedBox(height: 5),
-        Container(width: 16, height: 2, color: AppColors.textDark),
-        const SizedBox(height: 5),
-        Container(width: 22, height: 2, color: AppColors.textDark),
-      ],
-    );
-  }
-}
 
 class _CategoryRow extends StatelessWidget {
   final CategoryData category;

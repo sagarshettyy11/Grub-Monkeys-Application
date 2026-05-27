@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
+import 'package:grub_monkeys/widgets/common_topbar.dart';
 
 class AppColors {
   static const primary = Color(0xFFF47C2E);
@@ -37,7 +38,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildTopBar(context),
+            CommonTopBar(title: 'Admin Profile', subtitle: 'Manage your restaurant & account details'),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -59,47 +60,6 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
         ),
       ),
       bottomNavigationBar: const CommonBottomNav(currentIndex: 3),
-    );
-  }
-
-  Widget _buildTopBar(BuildContext context) {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.maybePop(context),
-            child: Container(
-              width: 36,
-              height: 36,
-              alignment: Alignment.center,
-              child: const Icon(Icons.chevron_left_rounded, size: 28, color: AppColors.textDark),
-            ),
-          ),
-          const SizedBox(width: 6),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Admin Profile',
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textDark,
-                  letterSpacing: -0.3,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                'Manage your restaurant & account details',
-                style: TextStyle(fontSize: 12, color: AppColors.textLight),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 
