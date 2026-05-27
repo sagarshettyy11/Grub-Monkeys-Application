@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grub_monkeys/screens/analytics.dart';
+import 'package:grub_monkeys/constants/app_colors.dart';
 
 class CommonTopBar extends StatelessWidget {
   final String title;

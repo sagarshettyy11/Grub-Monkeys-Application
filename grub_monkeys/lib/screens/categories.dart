@@ -1,39 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/constants/app_colors.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 import 'package:grub_monkeys/widgets/common_topbar.dart';
-
-class AppColors {
-  static const primary = Color(0xFFF47C2E);
-  static const primaryLight = Color(0xFFFFF0E6);
-  static const background = Color(0xFFF8F8F8);
-  static const white = Color(0xFFFFFFFF);
-  static const textDark = Color(0xFF1A1A1A);
-  static const textMedium = Color(0xFF666666);
-  static const textLight = Color(0xFF9E9E9E);
-  static const border = Color(0xFFEEEEEE);
-  static const divider = Color(0xFFF0F0F0);
-  static const cardShadow = Color(0x0A000000);
-  static const editBlue = Color(0xFF4A90D9);
-  static const deleteRed = Color(0xFFE05252);
-  static const iconSeafood = Color(0xFFFEEFE2); // peach-orange
-  static const iconBurger = Color(0xFFFFF3E0); // warm amber
-  static const iconJuice = Color(0xFFE8F5E9); // fresh green
-  static const iconPizza = Color(0xFFFFFDE7); // yellow
-  static const iconDessert = Color(0xFFFCE4EC); // pink
-  static const iconChinese = Color(0xFFEDE7F6); // purple
-  static const iconSandwich = Color(0xFFE0F2F1); // teal
-  static const iconBeverage = Color(0xFFE3F2FD); // light blue
-  static const fgSeafood = Color(0xFFF47C2E);
-  static const fgBurger = Color(0xFFEF8C00);
-  static const fgJuice = Color(0xFF388E3C);
-  static const fgPizza = Color(0xFFD4A017);
-  static const fgDessert = Color(0xFFD81B60);
-  static const fgChinese = Color(0xFF7B1FA2);
-  static const fgSandwich = Color(0xFF00897B);
-  static const fgBeverage = Color(0xFF1E88E5);
-}
-
 class CategoryData {
   final String name;
   final int itemCount;
@@ -295,8 +264,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     );
   }
 }
-
-
 
 class _CategoryRow extends StatelessWidget {
   final CategoryData category;

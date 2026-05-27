@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
 import '../screens/analytics.dart';
 import '../screens/dashboard.dart';
 import '../screens/categories.dart';
 import '../screens/profile.dart';
-
-class AppColors {
-  static const primary = Color(0xFFF47C2E);
-  static const textLight = Color(0xFF9E9E9E);
-  static const white = Color(0xFFFFFFFF);
-  static const border = Color(0xFFEEEEEE);
-}
 
 class CommonBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -23,7 +17,7 @@ class CommonBottomNav extends StatelessWidget {
       _NavItem(icon: Icons.person_rounded, label: 'Profile', screen: const AdminProfileScreen()),
     ];
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.border, width: 1)),
       ),

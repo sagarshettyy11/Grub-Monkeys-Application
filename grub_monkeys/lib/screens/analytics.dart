@@ -2,42 +2,9 @@ import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/constants/app_colors.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 import 'package:grub_monkeys/widgets/common_topbar.dart';
-
-class AppColors {
-  static const primary = Color(0xFFF47C2E);
-  static const primaryLight = Color(0xFFFFF0E6);
-  static const background = Color(0xFFF8F8F8);
-  static const white = Color(0xFFFFFFFF);
-  static const textDark = Color(0xFF1A1A1A);
-  static const textMedium = Color(0xFF555555);
-  static const textLight = Color(0xFF9E9E9E);
-  static const border = Color(0xFFEEEEEE);
-  static const divider = Color(0xFFF2F2F2);
-  static const cardShadow = Color(0x0A000000);
-  static const chartBlue = Color(0xFF3B6FE8);
-  static const chartBlueFill = Color(0x183B6FE8);
-  static const positiveGreen = Color(0xFF22C55E);
-  static const negativeRed = Color(0xFFEF4444);
-  static const purpleBg = Color(0xFFF0EFFE);
-  static const purpleFg = Color(0xFF7C6FE8);
-  static const greenBg = Color(0xFFE8F8EE);
-  static const greenFg = Color(0xFF22A05E);
-  static const orangeBg = Color(0xFFFFF0E6);
-  static const orangeFg = Color(0xFFF47C2E);
-  static const blueBg = Color(0xFFE6F1FB);
-  static const blueFg = Color(0xFF3B82F6);
-  static const redBg = Color(0xFFFFEEEE);
-  static const redFg = Color(0xFFEF4444);
-  static const infoBannerBg = Color(0xFFEFF4FF);
-  static const infoBannerIcon = Color(0xFF3B6FE8);
-  static const barBlue = Color(0xFF3B6FE8);
-  static const barPurple = Color(0xFF7C6FE8);
-  static const barGrey = Color(0xFFE0E0E0);
-  static const navActive = Color(0xFFF47C2E);
-  static const navInactive = Color(0xFF9E9E9E);
-}
 
 class StatCardData {
   final IconData icon;

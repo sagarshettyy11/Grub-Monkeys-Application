@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/constants/app_colors.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 import 'package:grub_monkeys/widgets/common_topbar.dart';
 
@@ -23,22 +24,6 @@ class FoodItem {
     required this.isActive,
     required this.imageUrl,
   });
-}
-
-class AppColors {
-  static const primary = Color(0xFFF47C2E);
-  static const primaryLight = Color(0xFFFFF0E6);
-  static const background = Color(0xFFF8F8F8);
-  static const white = Color(0xFFFFFFFF);
-  static const textDark = Color(0xFF1A1A1A);
-  static const textMedium = Color(0xFF666666);
-  static const textLight = Color(0xFF999999);
-  static const border = Color(0xFFEEEEEE);
-  static const activeGreenBg = Color(0xFFE8F8EE);
-  static const activeGreenText = Color(0xFF2EAA5E);
-  static const editBlueBorder = Color(0xFF4A90D9);
-  static const deletRedBorder = Color(0xFFE05252);
-  static const cardShadow = Color(0x0A000000);
 }
 
 final List<FoodCategory> _categories = [
@@ -159,7 +144,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bottomNavigationBar: const CommonBottomNav(currentIndex: 0),
     );
   }
-
 
   Widget _buildCategoriesSection() {
     return Padding(
@@ -464,16 +448,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   // Edit button
                   _buildActionButton(
                     icon: Icons.edit_outlined,
-                    iconColor: AppColors.editBlueBorder,
-                    borderColor: AppColors.editBlueBorder,
+                    iconColor: AppColors.editBlue,
+                    borderColor: AppColors.editBlue,
                     onTap: () {},
                   ),
                   const SizedBox(width: 6),
                   // Delete button
                   _buildActionButton(
                     icon: Icons.delete_outline_rounded,
-                    iconColor: AppColors.deletRedBorder,
-                    borderColor: AppColors.deletRedBorder,
+                    iconColor: AppColors.deleteRed,
+                    borderColor: AppColors.deleteRed,
                     onTap: () {},
                   ),
                   const SizedBox(width: 6),

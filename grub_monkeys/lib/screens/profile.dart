@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grub_monkeys/constants/app_colors.dart';
 import 'package:grub_monkeys/widgets/bottom_navigation.dart';
 import 'package:grub_monkeys/widgets/common_topbar.dart';
-
-class AppColors {
-  static const primary = Color(0xFFF47C2E);
-  static const primaryLight = Color(0xFFFFF0E6);
-  static const primaryBorder = Color(0xFFF9C49E);
-  static const background = Color(0xFFF8F8F8);
-  static const white = Color(0xFFFFFFFF);
-  static const textDark = Color(0xFF1A1A1A);
-  static const textMedium = Color(0xFF555555);
-  static const textLight = Color(0xFF9E9E9E);
-  static const border = Color(0xFFEEEEEE);
-  static const divider = Color(0xFFF2F2F2);
-  static const cardShadow = Color(0x0A000000);
-  static const activeGreenBg = Color(0xFFE8F8EE);
-  static const activeGreenTxt = Color(0xFF2EAA5E);
-  static const logoutRed = Color(0xFFE05252);
-  static const logoutRedLight = Color(0xFFFFF0F0);
-}
 
 class AdminProfileScreen extends StatefulWidget {
   const AdminProfileScreen({super.key});
@@ -139,7 +122,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                       ),
                       child: const Text(
                         'Active',
-                        style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.activeGreenTxt),
+                        style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.activeGreenText),
                       ),
                     ),
                     const SizedBox(height: 12),
