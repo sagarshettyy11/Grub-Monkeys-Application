@@ -30,11 +30,7 @@ class FoodCategory {
   final int itemCount;
   final String imageUrl;
 
-  const FoodCategory({
-    required this.name,
-    required this.itemCount,
-    required this.imageUrl,
-  });
+  const FoodCategory({required this.name, required this.itemCount, required this.imageUrl});
 }
 
 class FoodItem {
@@ -56,19 +52,19 @@ class FoodItem {
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 class AppColors {
-  static const primary     = Color(0xFFF47C2E);
-  static const primaryLight= Color(0xFFFFF0E6);
-  static const background  = Color(0xFFF8F8F8);
-  static const white       = Color(0xFFFFFFFF);
-  static const textDark    = Color(0xFF1A1A1A);
-  static const textMedium  = Color(0xFF666666);
-  static const textLight   = Color(0xFF999999);
-  static const border      = Color(0xFFEEEEEE);
-  static const activeGreenBg  = Color(0xFFE8F8EE);
-  static const activeGreenText= Color(0xFF2EAA5E);
+  static const primary = Color(0xFFF47C2E);
+  static const primaryLight = Color(0xFFFFF0E6);
+  static const background = Color(0xFFF8F8F8);
+  static const white = Color(0xFFFFFFFF);
+  static const textDark = Color(0xFF1A1A1A);
+  static const textMedium = Color(0xFF666666);
+  static const textLight = Color(0xFF999999);
+  static const border = Color(0xFFEEEEEE);
+  static const activeGreenBg = Color(0xFFE8F8EE);
+  static const activeGreenText = Color(0xFF2EAA5E);
   static const editBlueBorder = Color(0xFF4A90D9);
   static const deletRedBorder = Color(0xFFE05252);
-  static const cardShadow  = Color(0x0A000000);
+  static const cardShadow = Color(0x0A000000);
 }
 
 // ─── Sample Data ─────────────────────────────────────────────────────────────
@@ -150,7 +146,7 @@ class FoodManagementScreen extends StatefulWidget {
 
 class _FoodManagementScreenState extends State<FoodManagementScreen> {
   int _selectedCategoryIndex = 0;
-  int _selectedNavIndex      = 0;
+  int _selectedNavIndex = 0;
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -161,10 +157,9 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark),
+    );
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -198,15 +193,12 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
     );
   }
 
-  // ─── Top Bar ──────────────────────────────────────────────────────────────
-
   Widget _buildTopBar() {
     return Container(
       color: AppColors.white,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(
         children: [
-          // Hamburger icon
           GestureDetector(
             onTap: () {},
             child: Column(
@@ -239,11 +231,7 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                 const SizedBox(height: 2),
                 Text(
                   'Manage your food categories & items',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textLight,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: TextStyle(fontSize: 12, color: AppColors.textLight, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -268,19 +256,11 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                   backgroundColor: AppColors.primary,
                   elevation: 0,
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
               ),
               const SizedBox(height: 3),
-              Text(
-                'Add new list / category',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: AppColors.textLight,
-                ),
-              ),
+              Text('Add new list / category', style: TextStyle(fontSize: 10, color: AppColors.textLight)),
             ],
           ),
         ],
@@ -302,21 +282,13 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             children: [
               const Text(
                 'Categories',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textDark,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textDark),
               ),
               GestureDetector(
                 onTap: () {},
                 child: const Text(
                   'View All',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
-                  ),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.primary),
                 ),
               ),
             ],
@@ -341,7 +313,7 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
   }
 
   Widget _buildCategoryCard(int index) {
-    final category   = _categories[index];
+    final category = _categories[index];
     final isSelected = index == _selectedCategoryIndex;
 
     return GestureDetector(
@@ -352,17 +324,8 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.border,
-            width: isSelected ? 2.0 : 1.0,
-          ),
-          boxShadow: const [
-            BoxShadow(
-              color: AppColors.cardShadow,
-              blurRadius: 6,
-              offset: Offset(0, 2),
-            ),
-          ],
+          border: Border.all(color: isSelected ? AppColors.primary : AppColors.border, width: isSelected ? 2.0 : 1.0),
+          boxShadow: const [BoxShadow(color: AppColors.cardShadow, blurRadius: 6, offset: Offset(0, 2))],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -385,32 +348,19 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
             const SizedBox(height: 8),
             Text(
               category.name,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textDark,
-              ),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textDark),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 2),
-            Text(
-              '${category.itemCount} Items',
-              style: const TextStyle(
-                fontSize: 11,
-                color: AppColors.textLight,
-              ),
-            ),
+            Text('${category.itemCount} Items', style: const TextStyle(fontSize: 11, color: AppColors.textLight)),
             // Selected orange underline indicator
             const SizedBox(height: 6),
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 3,
               width: isSelected ? 28 : 0,
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(2),
-              ),
+              decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2)),
             ),
           ],
         ),
@@ -430,13 +380,7 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: const [
-            BoxShadow(
-              color: AppColors.cardShadow,
-              blurRadius: 6,
-              offset: Offset(0, 2),
-            ),
-          ],
+          boxShadow: const [BoxShadow(color: AppColors.cardShadow, blurRadius: 6, offset: Offset(0, 2))],
         ),
         child: Row(
           children: [
@@ -462,20 +406,10 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                 children: [
                   Text(
                     category.name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textDark,
-                    ),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textDark),
                   ),
                   const SizedBox(height: 3),
-                  Text(
-                    '${category.itemCount} Items',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.textLight,
-                    ),
-                  ),
+                  Text('${category.itemCount} Items', style: const TextStyle(fontSize: 13, color: AppColors.textLight)),
                 ],
               ),
             ),
@@ -487,29 +421,17 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                   icon: const Icon(Icons.add, size: 15, color: AppColors.white),
                   label: const Text(
                     'Add Item',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white,
-                    ),
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.white),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'Add new item in this list',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: AppColors.textLight,
-                  ),
-                ),
+                const Text('Add new item in this list', style: TextStyle(fontSize: 10, color: AppColors.textLight)),
               ],
             ),
           ],
@@ -539,15 +461,8 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                 style: const TextStyle(fontSize: 14, color: AppColors.textDark),
                 decoration: InputDecoration(
                   hintText: 'Search items...',
-                  hintStyle: const TextStyle(
-                    fontSize: 14,
-                    color: AppColors.textLight,
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.search_rounded,
-                    color: AppColors.textLight,
-                    size: 22,
-                  ),
+                  hintStyle: const TextStyle(fontSize: 14, color: AppColors.textLight),
+                  prefixIcon: const Icon(Icons.search_rounded, color: AppColors.textLight, size: 22),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
@@ -564,11 +479,7 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: AppColors.border),
             ),
-            child: const Icon(
-              Icons.tune_rounded,
-              color: AppColors.textDark,
-              size: 22,
-            ),
+            child: const Icon(Icons.tune_rounded, color: AppColors.textDark, size: 22),
           ),
         ],
       ),
@@ -584,25 +495,14 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: const [
-            BoxShadow(
-              color: AppColors.cardShadow,
-              blurRadius: 6,
-              offset: Offset(0, 2),
-            ),
-          ],
+          boxShadow: const [BoxShadow(color: AppColors.cardShadow, blurRadius: 6, offset: Offset(0, 2))],
         ),
         child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: _seaFoodItems.length,
-          separatorBuilder: (_, _) => const Divider(
-            height: 1,
-            thickness: 0.8,
-            color: AppColors.border,
-            indent: 20,
-            endIndent: 20,
-          ),
+          separatorBuilder: (_, _) =>
+              const Divider(height: 1, thickness: 0.8, color: AppColors.border, indent: 20, endIndent: 20),
           itemBuilder: (context, index) {
             return _buildFoodItemRow(_seaFoodItems[index], index);
           },
@@ -653,22 +553,14 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
                 const SizedBox(height: 4),
                 Text(
                   item.description,
-                  style: const TextStyle(
-                    fontSize: 11.5,
-                    color: AppColors.textMedium,
-                    height: 1.4,
-                  ),
+                  style: const TextStyle(fontSize: 11.5, color: AppColors.textMedium, height: 1.4),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 6),
                 Text(
                   '\$${item.price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
-                  ),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textDark),
                 ),
               ],
             ),
@@ -683,17 +575,10 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
               if (item.isActive)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColors.activeGreenBg,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  decoration: BoxDecoration(color: AppColors.activeGreenBg, borderRadius: BorderRadius.circular(20)),
                   child: const Text(
                     'Active',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.activeGreenText,
-                    ),
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.activeGreenText),
                   ),
                 ),
               const SizedBox(height: 8),
@@ -758,10 +643,10 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
 
   Widget _buildBottomNav() {
     final navItems = [
-      _NavItem(icon: Icons.room_service_outlined,   label: 'Items'),
-      _NavItem(icon: Icons.widgets_outlined,         label: 'Categories'),
-      _NavItem(icon: Icons.bar_chart_rounded,        label: 'Reports'),
-      _NavItem(icon: Icons.more_horiz_rounded,       label: 'More'),
+      _NavItem(icon: Icons.room_service_outlined, label: 'Items'),
+      _NavItem(icon: Icons.widgets_outlined, label: 'Categories'),
+      _NavItem(icon: Icons.bar_chart_rounded, label: 'Reports'),
+      _NavItem(icon: Icons.more_horiz_rounded, label: 'More'),
     ];
 
     return Container(
@@ -782,11 +667,7 @@ class _FoodManagementScreenState extends State<FoodManagementScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    navItems[index].icon,
-                    size: 26,
-                    color: isActive ? AppColors.primary : AppColors.textLight,
-                  ),
+                  Icon(navItems[index].icon, size: 26, color: isActive ? AppColors.primary : AppColors.textLight),
                   const SizedBox(height: 4),
                   Text(
                     navItems[index].label,
