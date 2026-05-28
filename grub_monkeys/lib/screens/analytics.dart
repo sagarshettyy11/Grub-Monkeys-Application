@@ -157,7 +157,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const CommonBottomNav(currentIndex: 0),
+      bottomNavigationBar: const CommonBottomNav(currentIndex: 2),
     );
   }
 
